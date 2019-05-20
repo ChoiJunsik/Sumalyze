@@ -1,0 +1,239 @@
+{% extends "sumalyze/layout.html" %}
+
+{% block before-body %}
+    <style>        
+        body {
+            font-family: sans-serif;
+        }
+        .file-upload {
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .file-upload-btn {
+            width: 100%;
+            color: #fff;
+            background: #0069AA;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            transition: all .2s ease;
+            font-weight: 700;
+        }
+        .file-upload-btn:hover {
+            background: rgb(0, 90, 146);
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+        .file-upload-content {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            background: #ECF0F1;
+            border: 3px dashed #bbb;
+        }
+        .file-upload-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-upload-wrap {
+            margin-top: 20px;
+            border: 3px dashed #0069AA;
+            background: #ECF0F1;
+            position: relative;
+        }
+        .file-upload-wrap:hover {
+            background-color: rgb(205, 211, 212);
+            border: 3px dashed #0069AA;
+        }
+        .file-title-wrap {
+            padding: 0 15px 15px 15px;
+            color: #222;
+        } 
+        .drag-text, .info-text{
+            text-align: center;
+        }     
+        .drag-text h3 {
+            font-weight: 100;
+            color: #0069AA;
+            padding: 60px 0;
+        }            
+        .file-upload-image {
+            max-height: 200px;
+            max-width: 200px;
+            margin: auto;
+            padding: 20px;
+        }          
+        .remove-file {
+            width: 200px;
+            color: #fff;
+            background: #cd4535;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        /* radiobutton start */
+        .radio {
+            opacity: 0;
+            position: absolute;   
+        }
+        .radio, .radio-label {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .radio-label {
+            position: relative;
+        }
+        .radio + .radio-label:before {
+            content: '';
+            background: #fff;
+            border: 2px solid #bbb;
+            display: inline-block;
+            vertical-align: middle;
+            width: 20px;
+            height: 20px;
+            padding: 2px;
+            margin-right: 10px;
+            text-align: center;
+        }
+        .radio + .radio-label:before {
+            border-radius: 50%;
+        }
+        .radio:checked + .radio-label:before {
+            background: #aaa;
+            box-shadow: inset 0px 0px 0px 4px #fff;
+        }
+        .radio-form {
+            display: inline-block;
+            margin: 20px auto;
+            width: 49%;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            padding: 2em;
+            padding-top : 1em;
+            border-radius: 0.5em;
+        }
+        .radio-title {
+            margin: 10px auto;
+            text-align: center;
+            color: #555;
+        }
+
+        /* start button */
+        .btn-push {
+            width: 100%;
+            top: 0px;
+            text-decoration: none;
+            font-size: 25px;
+            padding: 15px 50px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            transition: All 250ms ease;
+        }
+        .btn-push:active {
+            position: relative;
+            top: 5px;
+            box-shadow: none !important;
+            transition: All 250ms ease;
+        }
+        .btn-push.red {
+            background: #df4242;
+            color: #fff;
+            border: 1px solid #a01b1b;
+            box-shadow: 0px 5px 0px #a01b1b;
+            text-shadow: 1px 1px 1px #a01b1b;
+        }
+    </style>
+{% endblock %}
+    
+{% block content %}
+    <div class="info-text">
+        {% block content-title %}
+        {% endblock %}
+    </div>
+    <hr> 
+
+    <form action="" method="post" enctype="multipart/form-data" autocomplete="off" class="file-upload">
+        {% csrf_token %}
+        <div class="control-group">
+            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )" name="pdf">ADD FILE</button>
+            
+            <div class="file-upload-wrap" name="pdf">
+                <input class="file-upload-input" type='file' onchange="readURL(this);" name="pdf"/>
+                <div class="drag-text" name="pdf">
+                <h3>Drag &amp; Drop Files Here</h3>
+                </div>
+            </div>
+            <div class="file-upload-content">
+                <b><span class="file-title"></span></b>
+                <div class="file-title-wrap">
+                <button type="button" onclick="removeUpload()" class="remove-file">Remove</button>
+                </div>
+            </div>
+        </div> 
+
+        <div class="control-group radio-form">
+            <h5 class='radio-title'>주제 선택</h5>
+            <div>
+                <input id="radio-type1" class="radio" name="category" type="radio" checked value="논문">
+                <label for="radio-type1" class="radio-label">논문</label>
+            </div>
+            <div>
+                <input id="radio-type2" class="radio"name="category" type="radio" value="학습자료">
+                <label for="radio-type2" class="radio-label">학습</label>
+            </div>
+            <div>
+                <input id="radio-type3" class="radio" name="category" type="radio" value="강연">
+                <label for="radio-type3" class="radio-label">강연</label>
+            </div>
+        </div>
+
+        <div class="control-group radio-form">
+            <h5 class='radio-title'>언어 선택</h5>
+            <div>
+                <input id="radio-lang1" class="radio" name="lang" type="radio" checked value="English">
+                <label for="radio-lang1" class="radio-label">English</label>
+            </div>
+            <div style="color: #ffffff">
+                <label for="radio-lang3" class="radio-label">temp</label>
+            </div>
+            <div>
+                <input id="radio-lang2" class="radio"name="lang" type="radio" value="한국어">
+                <label for="radio-lang2" class="radio-label">한국어</label>
+            </div>
+
+        </div>
+
+        <input class="btn btn-push red" type="submit" value="Start Sumalyze!">
+    </form>
+
+{% endblock %}
+
+{% block extra-body %}
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.file-upload-wrap').hide();
+                    $('.file-upload-content').show();
+                    $('.file-title').html(input.files[0].name);
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                removeUpload();
+            }
+        }    
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.file-upload-wrap').show();
+        }
+    </script>
+{% endblock %}
