@@ -1,0 +1,73 @@
+{% extends 'sumalyze/base.html' %}
+
+
+{% block content %}
+
+<div class="post col-md-12 card">
+
+          <!-- Title -->
+          <h1 class="mt-4">{{ post.title }}</h1>
+
+          <hr>
+
+          <!-- Date/Time -->
+          <p>{{post.published_date}}</p>
+
+          <hr>
+          
+          {% comment %} 
+          <!-- Preview Image -->
+          <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+
+          <hr> 
+          {% endcomment %}
+
+          <!-- Post Content -->
+          
+          <p class="nbsp">{{ post.text|linebreaksbr }}</p>
+
+          <hr>
+        <div class="col-md-12 text-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'sumalyze:post_edit' pk=post.pk %}">수정</a>
+            <a href="{% url 'sumalyze:post_remove' pk=post.pk %}">삭제</a>
+        {% endif %}
+        </div>
+
+          <!-- Comments Form -->
+          <div class="card my-4">
+            <h5 class="card-header">댓글 남기기:</h5>
+            <div class="card-body">
+              <form  method="POST" class="post-form">{% csrf_token %}
+                <div class="form-group">
+                  <input type="text" name="author" maxlength="200" required id="id_author"></p>
+                  <textarea name="text" class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">게시</button>
+              </form>
+            </div>
+          </div>
+
+
+        {% for comment in post.comments.all %}
+            <div class="comment media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                <div class="date">
+                    {{ comment.created_date }}
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'sumalyze:comment_remove' pk=comment.pk %}">삭제</a>
+                    {% endif %}
+                </div>
+                <strong>{{ comment.author }}</strong>
+                <p>{{ comment.text|linebreaks }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+
+
+
+</div>
+{% endblock %}
