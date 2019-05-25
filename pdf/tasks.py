@@ -18,9 +18,7 @@ def pdfSumalyze(pk):
 
     chunk = list(map(''.join, zip(*[iter(text)]*650)))
     chunk2 = []
-    for idx, val in enumerate(chunk):
-        print(idx,val)
-        print("\n\n\n\n\n") 
+
     #요약 적용
     idx = 0
     while idx != (len(chunk)) :

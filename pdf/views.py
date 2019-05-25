@@ -3,7 +3,6 @@ from .models import PdfPost
 from .forms import PdfPostForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from .pdfToText import convert_pdf_to_txt
 from .tasks import pdfSumalyze
 from django.conf import settings
 

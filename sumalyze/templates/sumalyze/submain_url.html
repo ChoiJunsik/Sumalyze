@@ -93,44 +93,51 @@
     </div>
     <hr> 
 
-    <div class="input-group input-group-lg">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-lg">URL</span>
-        </div>
-        <input type="text" class="form-control">
-    </div>
+    <form action="" method="post" enctype="multipart/form-data" autocomplete="off" class="file-upload">
+        {% csrf_token %}
+        <div class="control-group">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">URL</span>
+                </div>
+                <input type="text" name='url' class="form-control">
+            </div>
+        </div> 
 
-    <form class="radio-form">
-        <h5 class='radio-title'>컨텐츠의 주제 선택</h5>
-        <div>
-            <input id="radio-type1" class="radio" name="radio-group" type="radio" checked>
-            <label for="radio-type1" class="radio-label">논문</label>
+        <div class="control-group radio-form">
+            <h5 class='radio-title'>주제 선택</h5>
+            <div>
+                <input id="radio-type1" class="radio" name="category" type="radio" checked value="논문">
+                <label for="radio-type1" class="radio-label">논문</label>
+            </div>
+            <div>
+                <input id="radio-type2" class="radio"name="category" type="radio" value="학습자료">
+                <label for="radio-type2" class="radio-label">학습</label>
+            </div>
+            <div>
+                <input id="radio-type3" class="radio" name="category" type="radio" value="강연">
+                <label for="radio-type3" class="radio-label">강연</label>
+            </div>
         </div>
-        <div>
-            <input id="radio-type2" class="radio"name="radio-group" type="radio">
-            <label for="radio-type2" class="radio-label">학습서</label>
+
+        <div class="control-group radio-form">
+            <h5 class='radio-title'>언어 선택</h5>
+            <div>
+                <input id="radio-lang1" class="radio" name="lang" type="radio" checked value="English">
+                <label for="radio-lang1" class="radio-label">English</label>
+            </div>
+            <div style="color: #ffffff">
+                <label for="radio-lang3" class="radio-label">temp</label>
+            </div>
+            <div>
+                <input id="radio-lang2" class="radio"name="lang" type="radio" value="한국어">
+                <label for="radio-lang2" class="radio-label">한국어</label>
+            </div>
+
         </div>
-        <div>
-            <input id="radio-type3" class="radio" name="radio-group" type="radio">
-            <label for="radio-type3" class="radio-label">강연</label>
-        </div>
+
+        <input class="btn btn-push red" type="submit" value="Start Sumalyze!">
     </form>
-    <form class="radio-form">
-        <h5 class='radio-title'>언어 선택</h5>
-        <div>
-            <input id="radio-lang1" class="radio" name="radio-group" type="radio" checked>
-            <label for="radio-lang1" class="radio-label">English</label>
-        </div>
-        <div>
-            <input id="radio-lang2" class="radio"name="radio-group" type="radio">
-            <label for="radio-lang2" class="radio-label">한국어</label>
-        </div>
-        <div style="color: #aaa">
-            <input id="radio-lang3" class="radio"name="radio-group" type="radio" disabled>
-            <label for="radio-lang3" class="radio-label">disabled</label>
-        </div>
-    </form>
-    <input class="btn btn-push red" type="submit" value="Start Sumalyze!">
 
 {% endblock %}
 
