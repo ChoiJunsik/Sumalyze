@@ -34,8 +34,8 @@
             </tbody>
         {% endfor %}
     </table>
-
-    <div class="text-center">
+    <div class="text-center" >
+        <div style="display:inline-block;">
         <ul class="pagination">
             <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
             {%for num in posts.paginator.page_range  %}
@@ -43,5 +43,7 @@
             {%endfor%}
             <li class="page-item"><a class="page-link" href="?page={{ posts.paginator.num_pages }}">last</a></li>
         </ul>
+        </div>
     </div>
+
 {% endblock %}

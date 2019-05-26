@@ -8,11 +8,26 @@ from django.views.generic import ListView
 from pdf.models import PdfPost
 from video.models import VideoPost
 from audio.models import AudioPost
+from django.views.generic import ListView
 # from lexrankr import LexRank
 
 def main(request):
     return render(request, 'sumalyze/main.html')
 
+
+# class StorageView(ListView):
+#     template_name = 'sumalyze/storage.html'
+#     context_object_name = 'posts'
+#     paginate_by = 6
+
+#     def get_queryset(self):
+#         videos = VideoPost.objects.all()
+#         audios = AudioPost.objects.all()
+#         pdfs = PdfPost.objects.all()
+#         posts = sorted(chain(pdfs, videos, audios),
+#                     key=attrgetter('created'),
+#                     reverse=True)         
+#         return posts
 
 @login_required
 def storage(request):
@@ -22,7 +37,7 @@ def storage(request):
     posts = sorted(chain(pdfs, videos, audios),
                         key=attrgetter('created'),
                         reverse=True)
-    paginator = Paginator(posts, 10) # Show 10 contacts per page
+    paginator = Paginator(posts, 6) # Show 10 contacts per page
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 

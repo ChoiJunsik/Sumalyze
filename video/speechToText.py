@@ -87,8 +87,3 @@ def splitandSTT(AUDIO_FILE, language):
 
     return text_list
     
-# #테스트용 리스트 프린트해보기
-#     for i in text_list:
-#         print("******************")
-#         print(i)
-    
