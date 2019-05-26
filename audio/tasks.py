@@ -9,6 +9,7 @@ import wave
 import re
 from .models import AudioPost
 from video.speechToText import *
+from sumalyze.ibmContent import ibmContent
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 
 @shared_task
@@ -22,6 +23,7 @@ def audioSumalyze(pk):
     chunk2 = []
     chunk =[] 
     speechtotext(str(post.pdf), lang, chunk)
+    text = " ".join(chunk)
 
     #요약 적용
     idx = 0
@@ -46,4 +48,6 @@ def audioSumalyze(pk):
         chunkToDB += c + '\n'
     
     post.content = chunkToDB
+    # 요약본이 아닌 원본으로 ibm Natural Language Understanding
+    post.keyword, post.relevance, post.category_ibm = ibmContent(text)
     post.save()

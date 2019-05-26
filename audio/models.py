@@ -8,6 +8,9 @@ class AudioPost(models.Model):
     content = models.TextField()
     category = models.CharField(max_length=200)
     lang =  models.CharField(max_length=200)
+    keyword = models.TextField()
+    relevance = models.TextField()
+    category_ibm = models.TextField()
     created = models.DateTimeField(default=timezone.now)
     
     def __str__(self):

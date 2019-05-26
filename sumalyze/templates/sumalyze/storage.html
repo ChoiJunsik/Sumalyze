@@ -1,0 +1,47 @@
+{% extends "sumalyze/layout.html" %}
+
+{% block before-body %}
+    <style>
+        
+    </style>
+{% endblock %}
+
+{% block content %}
+    
+      <div class="info-text">
+            <h3><b>STORAGE</b></h3>
+            <p>sumalyze된 결과들을 확인하세요!</p>
+            <p>title 직접 입력받게 고쳐야함,,,,,,</p>
+      </div>
+    <br>
+    
+    <table class="table text-center">
+        <thead class="thead-light">
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>날짜</th>
+            </tr>
+        </thead>
+
+        {% for post in posts %}
+            <tbody>
+                <tr>
+                    <td>{{ post.pk }}</td>
+                    <td><a href="{% url 'result' pk=post.pk %}">{{ post.title }}</a></td>
+                    <td>{{ post.created }}</td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+
+    <div class="text-center">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
+            {%for num in posts.paginator.page_range  %}
+                <li class="page-item"><a class="page-link" href="?page={{num}}">{{num}}</a></li>
+            {%endfor%}
+            <li class="page-item"><a class="page-link" href="?page={{ posts.paginator.num_pages }}">last</a></li>
+        </ul>
+    </div>
+{% endblock %}

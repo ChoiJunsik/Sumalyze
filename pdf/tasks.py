@@ -3,6 +3,7 @@ from sumalyze.celery import app
 from celery import shared_task
 from .models import PdfPost
 from .pdfToText import convert_pdf_to_txt
+from sumalyze.ibmContent import ibmContent
 from django.shortcuts import render, get_object_or_404,redirect
 import os
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
@@ -43,5 +44,7 @@ def pdfSumalyze(pk):
     
     post.content = chunkToDB
     post.pdf = None
+    # 요약본이 아닌 원본으로 ibm Natural Language Understanding
+    post.keyword, post.relevance, post.category_ibm = ibmContent(text)
     post.save()
 

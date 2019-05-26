@@ -9,6 +9,7 @@ import sys
 import wave
 import re
 from .speechToText import *
+from sumalyze.ibmContent import ibmContent
 from .models import VideoPost
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 
@@ -26,6 +27,7 @@ def videoSumalyze(pk):
     path = youtubeToAudio(url)
     post.title = re.sub('[^가-힣\\s]', '', str(path))
     chunk = splitandSTT(path, lang)
+    text = " ".join(chunk)
     os.remove(path+'.mp3')
     os.remove(path)
 
@@ -52,4 +54,7 @@ def videoSumalyze(pk):
         chunkToDB += c + '\n'
     
     post.content = chunkToDB
+    # 요약본이 아닌 원본으로 ibm Natural Language Understanding
+    post.keyword, post.relevance, post.category_ibm = ibmContent(text)
     post.save()
+    
