@@ -16,11 +16,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='VideoPost',
+            name='TextPost',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
-                ('url', models.CharField(max_length=300)),
+                ('text', models.TextField()),
                 ('content', models.TextField()),
                 ('category', models.CharField(max_length=200)),
                 ('lang', models.CharField(max_length=200)),

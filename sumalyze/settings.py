@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pdf',
     'video',
     'audio',
+    'text',
 ]
 
 MIDDLEWARE = [

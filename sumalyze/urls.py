@@ -12,7 +12,7 @@ urlpatterns = [
     path('audio/', include('audio.urls', namespace='audio')),
     path('pdf/', include('pdf.urls', namespace='pdf')),
     # path('image/', include('image.urls', namespace='image')),
-    # path('text/', include('text.urls', namespace='text')),
+    path('text/', include('text.urls', namespace='text')),
     path('accounts/', include('django.contrib.auth.urls')), # new
     path('storage/', views.storage, name='storage'),
     path('result/<int:pk>/', views.result, name='result'),

@@ -6,8 +6,7 @@ from watson_developer_cloud.natural_language_understanding_v1 import Features, K
 natural_language_understanding = NaturalLanguageUnderstandingV1(
     version='2018-11-16',
     iam_apikey='wQPrTT6lqYvIZBoYsRuXXzRyO7Rn4L6lP42WZxwyfzlj',
-    url='https://gateway-tok.watsonplatform.net/natural-language-understanding/api'
-)
+    url='https://gateway-tok.watsonplatform.net/natural-language-understanding/api')
 
 def ibmContent(text):
 
