@@ -1,11 +1,12 @@
 from __future__ import print_function
 import json
+import config
 from watson_developer_cloud import NaturalLanguageUnderstandingV1
 from watson_developer_cloud.natural_language_understanding_v1 import Features, KeywordsOptions,CategoriesOptions
 
 natural_language_understanding = NaturalLanguageUnderstandingV1(
     version='2018-11-16',
-    iam_apikey='wQPrTT6lqYvIZBoYsRuXXzRyO7Rn4L6lP42WZxwyfzlj',
+    iam_apikey= config.ibm_api_key,
     url='https://gateway-tok.watsonplatform.net/natural-language-understanding/api')
 
 def ibmContent(text):
