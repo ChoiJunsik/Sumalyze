@@ -5,4 +5,4 @@ class AudioPostForm(forms.ModelForm):
 
     class Meta:
         model = AudioPost
-        fields = ('pdf', 'category','lang')
+        fields = ('pdf', 'category','lang', 'title')

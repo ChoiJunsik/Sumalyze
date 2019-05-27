@@ -16,7 +16,7 @@ def index(request):
             post.category = form.cleaned_data['category']
             post.pdf = request.FILES['pdf']
             post.lang = form.cleaned_data['lang']
-            post.title = re.sub('[^가-힣\\s]', '', str(post.pdf))
+            post.title = form.cleaned_data['title']
             post.created = timezone.now()
             post.save()
             audioSumalyze.delay(post.pk)
