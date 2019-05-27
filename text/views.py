@@ -17,7 +17,7 @@ def index(request):
             post.category = form.cleaned_data['category']
             post.text = request.POST['text']
             post.lang = form.cleaned_data['lang']
-            post.title = "임시타이틀"
+            post.title = form.cleaned_data['title']
             post.created = timezone.now()
             post.save()
             textSumalyze.delay(post.pk)

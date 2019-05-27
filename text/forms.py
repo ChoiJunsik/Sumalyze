@@ -5,4 +5,4 @@ class TextPostForm(forms.ModelForm):
 
     class Meta:
         model = TextPost
-        fields = ('text', 'category','lang')
+        fields = ('text', 'category','lang', 'title')

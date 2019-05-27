@@ -45,6 +45,7 @@
             background: #ECF0F1;
             position: relative;
         }
+        .
         .file-upload-wrap:hover {
             background-color: rgb(205, 211, 212);
             border: 3px dashed #0069AA;
@@ -162,6 +163,10 @@
     <form action="" method="post" enctype="multipart/form-data" autocomplete="off" class="file-upload">
         {% csrf_token %}
         <div class="control-group">
+            <div class="input_title" >
+                <input type="text" name="title" class="form-control" placeholder="Title을 입력하세요">
+            </div>
+        <br/>
             <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )" name="pdf">ADD FILE</button>
             
             <div class="file-upload-wrap" name="pdf">

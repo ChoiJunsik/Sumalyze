@@ -14,6 +14,7 @@ def index(request):
             post.category = form.cleaned_data['category']
             post.url = request.POST['url']
             post.lang = form.cleaned_data['lang']
+            post.title = form.cleaned_data['title']
             post.created = timezone.now()
             post.save()
             videoSumalyze.delay(post.pk)

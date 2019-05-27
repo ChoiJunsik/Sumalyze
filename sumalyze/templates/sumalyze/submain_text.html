@@ -95,6 +95,10 @@
 
     <form action="" method="post" enctype="multipart/form-data" autocomplete="off" class="file-upload">
         {% csrf_token %}
+        <div class="input_title" >
+            <input type="text" name="title" class="form-control" placeholder="Title을 입력하세요">
+        </div>
+        <br/>
 		<textarea class="form-control" rows="15" name="text" placeholder="요약할 올바른 텍스트를 넣어주세요. (3줄 이상)"></textarea>
 
         <div class="control-group radio-form">

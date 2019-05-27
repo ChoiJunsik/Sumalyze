@@ -5,4 +5,4 @@ class PdfPostForm(forms.ModelForm):
 
     class Meta:
         model = PdfPost
-        fields = ('pdf', 'category','lang')
+        fields = ('pdf', 'category','lang', 'title')
