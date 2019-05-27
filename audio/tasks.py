@@ -11,6 +11,7 @@ from .models import AudioPost
 from video.speechToText import *
 from sumalyze.ibmContent import ibmContent
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'\media\\'
 
 @shared_task
 def audioSumalyze(pk):
@@ -22,7 +23,9 @@ def audioSumalyze(pk):
     lexrank = LexRank()
     chunk2 = []
     chunk =[] 
-    speechtotext(str(post.pdf), lang, chunk)
+    
+    #speechtotext(str(post.pdf), lang, chunk)
+    chunk = splitandSTT(path+str(post.pdf), lang)
     text = " ".join(chunk)
 
     #요약 적용
