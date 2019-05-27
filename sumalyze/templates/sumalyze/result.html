@@ -67,12 +67,17 @@
             border: 1px solid #ddd;
             background-color: #fafafa;
         }
+        .key-image{
+            width: 200px;
+            float: right;
+            margin: 14px;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
     <h3><b>{{ post.title }}</b></h3>
-    <p>목차와 요약, 분석이 포함되어야 함</p>
+    <div><img src="{{ image }}" class="key-image"></div>
     <hr>
     <h5>< 목 차 ></h5>
     <ol class="content-nav">

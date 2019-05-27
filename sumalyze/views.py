@@ -10,6 +10,7 @@ from video.models import VideoPost
 from audio.models import AudioPost
 from text.models import TextPost
 from django.views.generic import ListView
+from .crowling import image_crowling
 # from lexrankr import LexRank
 
 def main(request):
@@ -62,10 +63,12 @@ def pdfResult(request, pk):
     for a,b in zip(keyword_list, relevance_list):
         keyword_pair.append((a,b))
 
+    img_src = image_crowling(request, keyword_list[0])
     return render(request, 'sumalyze/result.html', {
         'post' : post,
         'keywords': keyword_pair,
         'categories': category_list,
+        'image' : img_src,
     })
 
 @login_required
@@ -80,10 +83,12 @@ def videoResult(request, pk):
     for a,b in zip(keyword_list, relevance_list):
         keyword_pair.append((a,b))
 
+    img_src = image_crowling(request, keyword_list[0])
     return render(request, 'sumalyze/result.html', {
         'post' : post,
         'keywords': keyword_pair,
         'categories': category_list,
+        'image' : img_src,
     })
 
 @login_required
@@ -98,10 +103,12 @@ def audioResult(request, pk):
     for a,b in zip(keyword_list, relevance_list):
         keyword_pair.append((a,b))
 
+    img_src = image_crowling(request, keyword_list[0])
     return render(request, 'sumalyze/result.html', {
         'post' : post,
         'keywords': keyword_pair,
         'categories': category_list,
+        'image' : img_src,
     })
 
 @login_required
@@ -116,9 +123,11 @@ def textResult(request, pk):
     for a,b in zip(keyword_list, relevance_list):
         keyword_pair.append((a,b))
 
+    img_src = image_crowling(request, keyword_list[0])
     return render(request, 'sumalyze/result.html', {
         'post' : post,
         'keywords': keyword_pair,
         'categories': category_list,
+        'image' : img_src,
     })
 

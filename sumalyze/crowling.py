@@ -3,8 +3,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 from urllib import parse
 
-def image_crowling(request):
-    word = '고양이'
+def image_crowling(request, word):
     tmp = 'https://ko.wikipedia.org/wiki/' + parse.quote(word)
     
     html = urllib.request.urlopen(tmp)
