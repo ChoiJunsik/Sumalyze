@@ -28,7 +28,7 @@
             <tbody>
                 <tr>
                     <td>{{ post.pk }}</td>
-                    <td><a href="{% url 'result' pk=post.pk %}">{{ post.title }}</a></td>
+                    <td><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></td>
                     <td>{{ post.created }}</td>
                 </tr>
             </tbody>

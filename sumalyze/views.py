@@ -49,8 +49,9 @@ def storage(request):
     })
 
 
+
 @login_required
-def result(request, pk):
+def pdfResult(request, pk):
     post = get_object_or_404(PdfPost, pk=pk)
 
     keyword_list = post.keyword.split('#')
@@ -66,3 +67,58 @@ def result(request, pk):
         'keywords': keyword_pair,
         'categories': category_list,
     })
+
+@login_required
+def videoResult(request, pk):
+    post = get_object_or_404(VideoPost, pk=pk)
+
+    keyword_list = post.keyword.split('#')
+    relevance_list = post.relevance.split('#')
+    category_list = post.category_ibm.split('#')
+
+    keyword_pair = []
+    for a,b in zip(keyword_list, relevance_list):
+        keyword_pair.append((a,b))
+
+    return render(request, 'sumalyze/result.html', {
+        'post' : post,
+        'keywords': keyword_pair,
+        'categories': category_list,
+    })
+
+@login_required
+def audioResult(request, pk):
+    post = get_object_or_404(AudioPost, pk=pk)
+
+    keyword_list = post.keyword.split('#')
+    relevance_list = post.relevance.split('#')
+    category_list = post.category_ibm.split('#')
+
+    keyword_pair = []
+    for a,b in zip(keyword_list, relevance_list):
+        keyword_pair.append((a,b))
+
+    return render(request, 'sumalyze/result.html', {
+        'post' : post,
+        'keywords': keyword_pair,
+        'categories': category_list,
+    })
+
+@login_required
+def textResult(request, pk):
+    post = get_object_or_404(TextPost, pk=pk)
+
+    keyword_list = post.keyword.split('#')
+    relevance_list = post.relevance.split('#')
+    category_list = post.category_ibm.split('#')
+
+    keyword_pair = []
+    for a,b in zip(keyword_list, relevance_list):
+        keyword_pair.append((a,b))
+
+    return render(request, 'sumalyze/result.html', {
+        'post' : post,
+        'keywords': keyword_pair,
+        'categories': category_list,
+    })
+

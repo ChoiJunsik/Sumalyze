@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 class PdfPost(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -15,3 +16,6 @@ class PdfPost(models.Model):
     
     def __str__(self):
         return self.title + " " + self.author.username +" "+self.created.strftime("%Y-%m-%d%H:%M:%S")
+
+    def get_absolute_url(self):
+        return reverse('pdfResult', args=[self.pk])

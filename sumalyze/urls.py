@@ -15,7 +15,10 @@ urlpatterns = [
     path('text/', include('text.urls', namespace='text')),
     path('accounts/', include('django.contrib.auth.urls')), # new
     path('storage/', views.storage, name='storage'),
-    path('result/<int:pk>/', views.result, name='result'),
+    path('result/pdf/<int:pk>/', views.pdfResult, name='pdfResult'),
+    path('result/video/<int:pk>/', views.videoResult, name='videoResult'),
+    path('result/audio/<int:pk>/', views.audioResult, name='audioResult'),
+    path('result/text/<int:pk>/', views.textResult, name='textResult'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
