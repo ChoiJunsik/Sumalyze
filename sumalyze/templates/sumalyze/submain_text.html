@@ -1,0 +1,146 @@
+{% extends "sumalyze/layout.html" %}
+
+{% block before-body %}
+    <style>        
+        body {
+            font-family: sans-serif;
+        }
+        .info-text{
+            text-align: center;
+        }  
+        
+
+        /* radiobutton start */
+        .radio {
+            opacity: 0;
+            position: absolute;   
+        }
+        .radio, .radio-label {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .radio-label {
+            position: relative;
+        }
+        .radio + .radio-label:before {
+            content: '';
+            background: #fff;
+            border: 2px solid #bbb;
+            display: inline-block;
+            vertical-align: middle;
+            width: 20px;
+            height: 20px;
+            padding: 2px;
+            margin-right: 10px;
+            text-align: center;
+        }
+        .radio + .radio-label:before {
+            border-radius: 50%;
+        }
+        .radio:checked + .radio-label:before {
+            background: #aaa;
+            box-shadow: inset 0px 0px 0px 4px #fff;
+        }
+        .radio-form {
+            display: inline-block;
+            margin: 20px auto;
+            width: 49%;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            padding: 2em;
+            padding-top : 1em;
+            border-radius: 0.5em;
+        }
+        .radio-title {
+            margin: 10px auto;
+            text-align: center;
+            color: #555;
+        }
+
+        /* start button */
+        .btn-push {
+            width: 100%;
+            top: 0px;
+            text-decoration: none;
+            font-size: 25px;
+            padding: 15px 50px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            transition: All 250ms ease;
+        }
+        .btn-push:active {
+            position: relative;
+            top: 5px;
+            box-shadow: none !important;
+            transition: All 250ms ease;
+        }
+        .btn-push.red {
+            background: #df4242;
+            color: #fff;
+            border: 1px solid #a01b1b;
+            box-shadow: 0px 5px 0px #a01b1b;
+            text-shadow: 1px 1px 1px #a01b1b;
+        }
+    </style>
+{% endblock %}
+    
+{% block content %}
+    <div class="info-text">
+        {% block content-title %}
+        {% endblock %}
+    </div>
+    <hr> 
+
+    <form action="" method="post" enctype="multipart/form-data" autocomplete="off" class="file-upload">
+        {% csrf_token %}
+        <div class="input_title" >
+            <input type="text" name="title" class="form-control" placeholder="Title을 입력하세요">
+        </div>
+        <br/>
+		<textarea class="form-control" rows="15" name="text" placeholder="요약할 올바른 텍스트를 넣어주세요. (3줄 이상)"></textarea>
+
+        <div class="control-group radio-form">
+            <h5 class='radio-title'>주제 선택</h5>
+            <div>
+                <input id="radio-type1" class="radio" name="category" type="radio" checked value="논문">
+                <label for="radio-type1" class="radio-label">논문</label>
+            </div>
+            <div>
+                <input id="radio-type2" class="radio"name="category" type="radio" value="학습자료">
+                <label for="radio-type2" class="radio-label">학습</label>
+            </div>
+            <div>
+                <input id="radio-type3" class="radio" name="category" type="radio" value="강연">
+                <label for="radio-type3" class="radio-label">강연</label>
+            </div>
+        </div>
+
+        <div class="control-group radio-form">
+            <h5 class='radio-title'>언어 선택</h5>
+            <div>
+                <input id="radio-lang1" class="radio" name="lang" type="radio" checked value="English">
+                <label for="radio-lang1" class="radio-label">English</label>
+            </div>
+            <div style="color: #ffffff">
+                <label for="radio-lang3" class="radio-label">temp</label>
+            </div>
+            <div>
+                <input id="radio-lang2" class="radio"name="lang" type="radio" value="한국어">
+                <label for="radio-lang2" class="radio-label">한국어</label>
+            </div>
+
+        </div>
+
+        <input class="btn btn-push red" type="submit" value="Start Sumalyze!">
+    </form>
+
+
+{% endblock %}
+
+{% block extra-body %}
+    <script>
+        
+    </script>
+{% endblock %}

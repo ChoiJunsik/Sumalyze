@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Sumalyze</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <style>
+            #content-start{
+                padding-top: 50px;
+            }
+              .footer {
+                padding: 1rem 0;
+                color: #999;
+                text-align: center;
+                background-color: #f9f9f9;
+                border-top: .05rem solid #e5e5e5;
+
+            }
+            .footer a {
+                color:#343a40;
+            }
+            .footer p:last-child {
+                margin-bottom: 0;
+            }
+            .info-text{
+                text-align: center;
+            }
+        </style>
+        {% block before-body %}
+        {% endblock %}
+        
+    </head>
+    <body>  
+
+        <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
+            <a class="navbar-brand h1" href="{% url "main" %}">SUMALYZE</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                </ul> 
+                <ul class="navbar-nav">
+                    {% if not user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="fa fa-user"></span> 회원가입</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="fa fa-sign-in-alt"></span> 로그인</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="fa fa-user-circle"></span> 프로필</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="fa fa-sign-out-alt"></span> 로그아웃</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container" id="content-start">
+            <div class="row">
+                <div class="col-sm-12">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                    
+                    <li class="list-inline-item">
+                        <p class="copyright text-muted">Copyright &copy; Sumalyze Team 2019</p>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/ChoiJunsik/Sumalyze">
+                        <span class="fa-stack fa-lg">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                        </a>
+                    </li>
+
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </footer>
+        {% block extra-body %}
+        {% endblock %}
+
+    </body>
+</html>

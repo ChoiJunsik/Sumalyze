@@ -1,0 +1,15 @@
+{% extends "sumalyze/submain_file.html" %}
+
+{% block content-title %}
+    {%if success%}
+        <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>성공!</strong> 요약과 분석에는 시간이 걸립니다 완료 후 메일을 전송하도록하겠습니다!
+        <a href="{% url "main" %}" class="alert-link">저장소로 가기</a>
+        </div>
+    {%endif%}
+    <h3><b>Audio 형식 분석하기</b></h3>
+    <p>Audio 형식의 컨텐츠를 업로드하고 컨텐츠의 주제를 선택하세요.</p>
+
+
+{% endblock %}
