@@ -13,7 +13,7 @@ def pdfSumalyze(pk):
     post = get_object_or_404(PdfPost, pk=pk)
     from lexrankr import LexRank
     lexrank = LexRank()
-    path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'\\media\\'+str(post.pdf)
+    path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'\media\\'+str(post.pdf)
     text = convert_pdf_to_txt(path)
     os.remove(path)
 
