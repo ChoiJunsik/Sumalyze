@@ -11,7 +11,7 @@ from .models import AudioPost
 from video.speechToText import *
 from sumalyze.ibmContent import ibmContent
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
-path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'\media\\'
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'\\media\\'
 
 @shared_task
 def audioSumalyze(pk):
