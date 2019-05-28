@@ -3,6 +3,8 @@ from sumalyze.celery import app
 from celery import shared_task
 from .models import TextPost
 from sumalyze.ibmContent import ibmContent
+from sumalyze.ibmIndex import ibmIndex
+
 from django.shortcuts import render, get_object_or_404,redirect
 import os
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
@@ -15,7 +17,7 @@ def textSumalyze(pk):
     text = post.text
     chunk = list(map(''.join, zip(*[iter(text)]*650)))
     chunk2 = []
-
+    idxToDB = ''
     #요약 적용
     idx = 0
     while idx != (len(chunk)) :
@@ -28,10 +30,14 @@ def textSumalyze(pk):
         summaries[0] = summaries[0]+'. '
         summaries[1] = summaries[1]+'. '
         summaries[2] = summaries[2]+'. '
-
-        chunk[idx] = ''.join(summaries)
+        indexStr = ''.join(summaries)
+        chunk[idx] = indexStr
+        idxToDB += ibmIndex(indexStr,summaries)
+        idxToDB += '#'
         chunk2.append(chunk[idx])
         idx += 1
+    post.index = idxToDB
+
 
     chunk = []
     chunkToDB = ''

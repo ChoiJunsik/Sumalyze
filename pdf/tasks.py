@@ -39,6 +39,7 @@ def pdfSumalyze(pk):
         idxToDB += '#'
         chunk2.append(chunk[idx])
         idx += 1
+    post.index = idxToDB
 
     chunk = []
     chunkToDB = ''

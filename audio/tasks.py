@@ -10,6 +10,7 @@ import re
 from .models import AudioPost
 from video.speechToText import *
 from sumalyze.ibmContent import ibmContent
+from sumalyze.ibmIndex import ibmIndex
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'\\media\\'
 
@@ -27,7 +28,7 @@ def audioSumalyze(pk):
     #speechtotext(str(post.pdf), lang, chunk)
     chunk = splitandSTT(path+str(post.pdf), lang)
     text = " ".join(chunk)
-
+    idxToDB = ''
     #요약 적용
     idx = 0
     while idx != (len(chunk)) :
@@ -40,10 +41,14 @@ def audioSumalyze(pk):
         summaries[0] = summaries[0]+'. '
         summaries[1] = summaries[1]+'. '
         summaries[2] = summaries[2]+'. '
-
-        chunk[idx] = ''.join(summaries)
+        indexStr = ''.join(summaries)
+        chunk[idx] = indexStr
+        idxToDB += ibmIndex(indexStr,summaries)
+        idxToDB += '#'
         chunk2.append(chunk[idx])
         idx += 1
+    post.index = idxToDB
+
 
     chunk = []
     chunkToDB = ''

@@ -13,7 +13,8 @@ class AudioPost(models.Model):
     relevance = models.TextField()
     category_ibm = models.TextField()
     created = models.DateTimeField(default=timezone.now)
-    
+    index = models.TextField(null=True  )
+
     def __str__(self):
         return self.title + " " + self.author.username +" "+self.created.strftime("%Y-%m-%d%H:%M:%S")
 

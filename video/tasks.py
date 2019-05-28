@@ -10,6 +10,8 @@ import wave
 import re
 from .speechToText import *
 from sumalyze.ibmContent import ibmContent
+from sumalyze.ibmIndex import ibmIndex
+
 from .models import VideoPost
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 
@@ -30,7 +32,7 @@ def videoSumalyze(pk):
     text = " ".join(chunk)
     os.remove(path+'.mp3')
     os.remove(path)
-
+    idxToDB = ''
     #요약 적용
     idx = 0
     while idx != (len(chunk)) :
@@ -43,10 +45,13 @@ def videoSumalyze(pk):
         summaries[0] = summaries[0]+'. '
         summaries[1] = summaries[1]+'. '
         summaries[2] = summaries[2]+'. '
-
-        chunk[idx] = ''.join(summaries)
+        indexStr = ''.join(summaries)
+        chunk[idx] = indexStr
+        idxToDB += ibmIndex(indexStr,summaries)
+        idxToDB += '#'
         chunk2.append(chunk[idx])
         idx += 1
+    post.index = idxToDB
 
     chunk = []
     chunkToDB = ''

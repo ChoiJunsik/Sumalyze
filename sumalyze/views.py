@@ -54,10 +54,13 @@ def storage(request):
 @login_required
 def pdfResult(request, pk):
     post = get_object_or_404(PdfPost, pk=pk)
-
     keyword_list = post.keyword.split('#')
     relevance_list = post.relevance.split('#')
     category_list = post.category_ibm.split('#')
+    content_list = post.content.split('\n')
+    index_list = post.index.split('#')
+    index_list = list(filter(None, index_list))
+    content_list = list(filter(None, content_list))
 
     keyword_pair = []
     for a,b in zip(keyword_list, relevance_list):
@@ -68,16 +71,22 @@ def pdfResult(request, pk):
         'post' : post,
         'keywords': keyword_pair,
         'categories': category_list,
+        'index':index_list,
+        'content':content_list,
         'image' : img_src,
     })
+
 
 @login_required
 def videoResult(request, pk):
     post = get_object_or_404(VideoPost, pk=pk)
-
     keyword_list = post.keyword.split('#')
     relevance_list = post.relevance.split('#')
     category_list = post.category_ibm.split('#')
+    content_list = post.content.split('\n')
+    index_list = post.index.split('#')
+    index_list = list(filter(None, index_list))
+    content_list = list(filter(None, content_list))
 
     keyword_pair = []
     for a,b in zip(keyword_list, relevance_list):
@@ -88,17 +97,22 @@ def videoResult(request, pk):
         'post' : post,
         'keywords': keyword_pair,
         'categories': category_list,
+        'index':index_list,
+        'content':content_list,
         'image' : img_src,
     })
+
 
 @login_required
 def audioResult(request, pk):
     post = get_object_or_404(AudioPost, pk=pk)
-
     keyword_list = post.keyword.split('#')
     relevance_list = post.relevance.split('#')
     category_list = post.category_ibm.split('#')
-
+    content_list = post.content.split('\n')
+    index_list = post.index.split('#')
+    index_list = list(filter(None, index_list))
+    content_list = list(filter(None, content_list))
     keyword_pair = []
     for a,b in zip(keyword_list, relevance_list):
         keyword_pair.append((a,b))
@@ -108,8 +122,11 @@ def audioResult(request, pk):
         'post' : post,
         'keywords': keyword_pair,
         'categories': category_list,
+        'index':index_list,
+        'content':content_list,
         'image' : img_src,
     })
+
 
 @login_required
 def textResult(request, pk):
@@ -118,7 +135,10 @@ def textResult(request, pk):
     keyword_list = post.keyword.split('#')
     relevance_list = post.relevance.split('#')
     category_list = post.category_ibm.split('#')
-
+    content_list = post.content.split('\n')
+    index_list = post.index.split('#')
+    index_list = list(filter(None, index_list))
+    content_list = list(filter(None, content_list))
     keyword_pair = []
     for a,b in zip(keyword_list, relevance_list):
         keyword_pair.append((a,b))
@@ -128,6 +148,8 @@ def textResult(request, pk):
         'post' : post,
         'keywords': keyword_pair,
         'categories': category_list,
+        'index':index_list,
+        'content':content_list,
         'image' : img_src,
     })
 
