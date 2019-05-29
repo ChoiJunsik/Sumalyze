@@ -11,7 +11,7 @@ urlpatterns = [
     path('video/', include('video.urls', namespace='video')),
     path('audio/', include('audio.urls', namespace='audio')),
     path('pdf/', include('pdf.urls', namespace='pdf')),
-    # path('image/', include('image.urls', namespace='image')),
+    path('image/', include('image.urls', namespace='image')),
     path('text/', include('text.urls', namespace='text')),
     path('accounts/', include('django.contrib.auth.urls')), # new
     path('storage/', views.storage, name='storage'),

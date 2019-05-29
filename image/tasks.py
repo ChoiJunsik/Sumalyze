@@ -1,20 +1,22 @@
 from __future__ import absolute_import
 from sumalyze.celery import app
 from celery import shared_task
-from .models import TextPost
+from .models import ImagePost
 from sumalyze.ibmContent import ibmContent
 from sumalyze.ibmIndex import ibmIndex
-
 from django.shortcuts import render, get_object_or_404,redirect
+from .imgToText import img2Text
 import os
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 
 @shared_task
-def textSumalyze(pk):
-    post = get_object_or_404(TextPost, pk=pk)
+def imageSumalyze(pk):
+    post = get_object_or_404(ImagePost, pk=pk)
     from lexrankr import LexRank
     lexrank = LexRank()
-    text = post.text
+    path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'\\media\\'+str(post.pdf)
+    text = img2Text(path)
+    os.remove(path)
     chunk =[]
     if len(text) < 650:
         chunk.append(text)
@@ -42,14 +44,14 @@ def textSumalyze(pk):
         idx += 1
     post.index = idxToDB
 
-
     chunk = []
     chunkToDB = ''
     for c in chunk2:
         chunkToDB += c + '\n'
     
     post.content = chunkToDB
-    post.text = 'clear'
+    post.pdf = None
+    post.index = idxToDB
     # 요약본이 아닌 원본으로 ibm Natural Language Understanding
     post.keyword, post.relevance, post.category_ibm = ibmContent(text)
     post.save()

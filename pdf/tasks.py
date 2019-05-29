@@ -18,7 +18,11 @@ def pdfSumalyze(pk):
     text = convert_pdf_to_txt(path)
     os.remove(path)
 
-    chunk = list(map(''.join, zip(*[iter(text)]*650)))
+    chunk =[]
+    if len(text) < 650:
+        chunk.append(text)
+    else: 
+        chunk = list(map(''.join, zip(*[iter(text)]*650)))    
     chunk2 = []
     idxToDB = ''
     #요약 적용
