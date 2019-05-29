@@ -16,6 +16,10 @@ def index(request):
             post.author = request.user
             post.category = form.cleaned_data['category']
             post.text = request.POST['text']
+            if len(str(post.text)) < 100 :
+               return render(request, 'text/text.html', {
+                'success': False,
+                })                
             post.lang = form.cleaned_data['lang']
             post.title = form.cleaned_data['title']
             post.created = timezone.now()
