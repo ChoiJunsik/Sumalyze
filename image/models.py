@@ -18,4 +18,4 @@ class ImagePost(models.Model):
         return self.title + " " + self.author.username +" "+self.created.strftime("%Y-%m-%d%H:%M:%S")
 
     def get_absolute_url(self):
-        return reverse('pdfResult', args=[self.pk])
+        return reverse('imageResult', args=[self.pk])
