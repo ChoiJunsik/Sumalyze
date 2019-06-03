@@ -53,17 +53,17 @@
                 <ul class="navbar-nav">
                     {% if not user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><span class="fa fa-user"></span> 회원가입</a>
+                            <a class="nav-link" href="{% url 'accounts:register' %}"><span class="fa fa-user"></span> 회원가입</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><span class="fa fa-sign-in-alt"></span> 로그인</a>
+                            <a class="nav-link" href="{% url 'accounts:login' %}"><span class="fa fa-sign-in-alt"></span> 로그인</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="#"><span class="fa fa-user-circle"></span> 프로필</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><span class="fa fa-sign-out-alt"></span> 로그아웃</a>
+                            <a class="nav-link" href="{% url 'accounts:logout' %}"><span class="fa fa-sign-out-alt"></span> 로그아웃</a>
                         </li>
                     {% endif %}
                 </ul>

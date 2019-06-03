@@ -1,0 +1,14 @@
+{% extends "sumalyze/layout.html" %}
+
+{% block content-title %}회원가입 완료{% endblock %}
+
+{% block content %}
+<div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 panel panel-default">
+            <div class="alert alert-info">회원가입 성공. Welcome, {{new_user.username}}</div>
+            <a class="btn btn-info" href="/">메인화면으로</a>
+        </div>
+        <div class="col-md-2"></div>
+</div>
+{% endblock %}

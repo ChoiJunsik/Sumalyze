@@ -1,0 +1,13 @@
+{% extends "sumalyze/layout.html" %}
+{% block content-title %}- Logout{% endblock %}
+
+{% block content %}
+<div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 panel panel-default">
+            <div class="alert alert-info">로그아웃 되었습니다.</div>
+            <a class="btn btn-primary" href="{% url 'login' %}">로그인하기</a>
+        </div>
+        <div class="col-md-2"></div>
+</div>
+{% endblock %}

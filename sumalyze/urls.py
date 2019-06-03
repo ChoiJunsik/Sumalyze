@@ -13,7 +13,7 @@ urlpatterns = [
     path('pdf/', include('pdf.urls', namespace='pdf')),
     path('image/', include('image.urls', namespace='image')),
     path('text/', include('text.urls', namespace='text')),
-    path('accounts/', include('django.contrib.auth.urls')), # new
+    path('accounts/',include('accounts.urls')),
     path('storage/', views.storage, name='storage'),
     path('result/pdf/<int:pk>/', views.pdfResult, name='pdfResult'),
     path('result/video/<int:pk>/', views.videoResult, name='videoResult'),
