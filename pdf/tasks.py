@@ -30,7 +30,7 @@ def pdfSumalyze(pk):
     while idx != (len(chunk)) :
         try:
             lexrank.summarize(chunk[idx])
-            summaries = lexrank.probe(3)
+            summaries = lexrank.probe(4)
         except:
             idx += 1
             continue    

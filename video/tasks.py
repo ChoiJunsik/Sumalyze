@@ -27,7 +27,7 @@ def videoSumalyze(pk):
     chunk2 = []
     url = post.url
     path = youtubeToAudio(url)
-    post.title = re.sub('[^가-힣\\s]', '', str(path))
+    #post.title = re.sub('[^가-힣\\s]', '', str(path))
     chunk = splitandSTT(path, lang)
     text = " ".join(chunk)
     os.remove(path+'.mp3')

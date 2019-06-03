@@ -19,6 +19,7 @@ urlpatterns = [
     path('result/video/<int:pk>/', views.videoResult, name='videoResult'),
     path('result/audio/<int:pk>/', views.audioResult, name='audioResult'),
     path('result/text/<int:pk>/', views.textResult, name='textResult'),
+    path('result/image/<int:pk>/', views.imageResult, name='imageResult'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
