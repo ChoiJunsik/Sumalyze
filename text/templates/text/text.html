@@ -1,17 +1,17 @@
 {% extends "sumalyze/submain_text.html" %}
 
 {% block content-title %}
-    {%if success%}
+    {%if success %}
         <div class="alert alert-success alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>성공!</strong> 요약과 분석에는 시간이 걸립니다 완료 후 메일을 전송하도록하겠습니다!
-        <a href="{% url "main" %}" class="alert-link">저장소로 가기</a>
+        <a href="{% url "storage" %}" class="alert-link">저장소로 가기</a>
         </div>
-    {% else %}
+    {% elif success is False%}
         <div class="alert alert-danger alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>실패!</strong> 요약,분석하기에는 컨텐츠 분량이 적습니다!
-        <a href="{% url "main" %}" class="alert-link">저장소로 가기</a>
+        <a href="{% url "storage" %}" class="alert-link">저장소로 가기</a>
         </div>
     {%endif%}
     <h3><b>TEXT 형식 변환하기</b></h3>
