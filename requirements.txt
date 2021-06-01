@@ -19,6 +19,6 @@ pdfminer.six==20181108
 Pillow==6.2.0
 pydub==0.23.1
 pytube==9.5.0
-urllib3==1.24.2
+urllib3==1.26.5
 watson-developer-cloud==2.10.1
 BeautifulSoup4==4.6.4
